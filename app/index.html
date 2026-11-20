@@ -3,20 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Coast — Cover Studio</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<header class="top">
+  <div class="brand">
+    <h1>NEON COAST <span>Cover Studio</span></h1>
+    <p>Your photos, six panels, one sunset poster — exported as a PNG.</p>
+  </div>
+  <div class="top-actions">
+    <button id="undo" type="button" disabled>Undo</button>
+    <button id="redo" type="button" disabled>Redo</button>
+    <button id="export" type="button" class="primary">Export PNG</button>
+  </div>
+</header>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="preview-col">
+    <div class="canvas-wrap">
+      <canvas id="cover" width="1920" height="1080" aria-label="The cover preview"></canvas>
+    </div>
+    <div class="size-row" id="size-pick" aria-label="Export size"></div>
+    <p class="hint">Click a panel to select it. Drag to move the photo, scroll to zoom. Drop your own photos onto the cover.</p>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <aside class="controls">
+    <section class="card">
+      <h2>Photos</h2>
+      <div class="tray" id="tray"></div>
+      <label class="upload-btn">Add your photos
+        <input id="upload" type="file" accept="image/*" multiple>
+      </label>
+      <div class="row">
+        <button id="autofill" type="button">Auto-fill cast</button>
+        <button id="shuffle-layout" type="button">Next layout</button>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Layout</h2>
+      <div class="opts" id="layout-pick"></div>
+    </section>
+    <section class="card">
+      <h2>Grade</h2>
+      <div class="opts" id="grade-pick"></div>
+      <label>Warmth <input id="warmth" type="range" min="0" max="1" step="0.05" value="0.55"></label>
+      <label>Saturation <input id="saturation" type="range" min="0.4" max="1.8" step="0.05" value="1"></label>
+      <label>Vignette <input id="vignette" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+      <label>Grain <input id="grain" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+    </section>
+    <section class="card" id="inspector">
+      <h2 id="panel-title">Panel 2</h2>
+      <label>Cast role <span class="inline"><input id="panel-role" type="text" value="THE DRIVER"> <button id="panel-role-next" type="button" title="Next role">↻</button></span></label>
+      <div class="row">
+        <label>Place <input id="panel-place" type="text" value="PALM ROW"></label>
+        <label>Time <input id="panel-time" type="text" value="6:42 PM"></label>
+      </div>
+      <label>Caption <input id="panel-caption" type="text" value="TOP DOWN, NO PLANS"></label>
+      <label>Zoom <input id="panel-zoom" type="range" min="1" max="2.5" step="0.01" value="1.1"></label>
+      <label>Focus X <input id="panel-fx" type="range" min="0.1" max="0.9" step="0.01" value="0.5"></label>
+      <label>Focus Y <input id="panel-fy" type="range" min="0.05" max="1" step="0.01" value="0.3"></label>
+      <button id="panel-reset" type="button">Reset crop</button>
+    </section>
+    <section class="card">
+      <h2>Words on the cover</h2>
+      <label>Title <input id="title" type="text" maxlength="24" value="NEON COAST" data-label="Title"></label>
+      <label>Script subtitle <input id="subtitle" type="text" maxlength="40" value="chasing the last light" data-label="Subtitle"></label>
+      <label>Press quote <input id="quote" type="text" maxlength="60" value="A SUNSET THAT NEVER ENDS" data-label="Press quote"></label>
+      <label>Outlet <input id="outlet" type="text" maxlength="30" value="THE VICE GAZETTE" data-label="Outlet"></label>
+      <label>Tagline <input id="tagline" type="text" maxlength="60" value="SIX FACES · ONE COAST · NO WAY BACK" data-label="Tagline"></label>
+      <label>Volume chip <input id="vol" type="text" maxlength="12" value="VOL. 01" data-label="Volume chip"></label>
+    </section>
+    <p class="fine">Photos never leave your machine. Sample photos were made with an image model for this app. Lettering: Anton and Pacifico under the SIL Open Font License.</p>
+  </aside>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
